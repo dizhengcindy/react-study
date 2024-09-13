@@ -58,11 +58,14 @@
 
     50) 
         event listener
-        function handleClick(){
-            console.log("Hello world");
+        function handleClick(msg){
+            console.log(msg);
         }
-        
-        <TabButton onClick={handleClick} />
+
+        <TabButton onClick={handleClick}  />
+
+        //"configure" the execution of an event-dependent function
+        <TabButton onClick={() => handleClick("Hello world")} />
 
         export default function TabButton({children, onClick}){
             return (
@@ -71,3 +74,39 @@
             );
         }
        
+    54) 
+    const [selectedTopic, setSelectedTopic] = useState("Please choose a value");
+    function handleSelect(selection){
+        setSelectedTopic(selection);
+        console.log(selectedTopic); //previous value, still in old app function
+    }
+    console.log previous value, after setState, React schedule state update, and then re-execute the component function. The updated value will be available after the component function executed again. 
+    
+    56) render content conditionally
+    1.
+    {!selectedTopic ? <p>Please select a topic</p> : <div>other content</div>}
+    2.
+    {!selectedTopic && <p>Please select a topic</p> }
+    {selectedTopic && <div>other content</div>}
+    3.
+    use a variable to store the jsx
+    let tabContent = <p>Please select a topic</p>;
+    if(selectedTopic){
+        tabContent = (<div>other content</div>);
+    }
+
+    return tabContent;
+
+    57) styling className
+    <button className={isSelected ? "active": undefined} ><button>
+
+    58) output list data dynamically
+    JSX is able to dealing with array of renderable data {["Hello", "World"]} or {[<p>Hello</p>, <p>World</p>]}
+    {CORE_CONCEPTS.map((conceptItem)=>{
+        <CoreConcept key={conceptItem.title} {...conceptItem}>
+    })}
+
+    key is for React to tell different items apart and React can efficiently render and update the list 
+
+
+  
