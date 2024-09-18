@@ -18,14 +18,17 @@ export default function UserInputField({
 }) {
   const key = getKey(label);
   return (
-    <div>
+    // <div>
+    <p>
       <label>{label}</label>
       <input
         type="number"
+        required
         min="0"
         onChange={(event) => handleValueChange(key, event.target.value)}
         value={inputValues[key]}
       />
-    </div>
+    </p>
+    // </div>
   );
 }

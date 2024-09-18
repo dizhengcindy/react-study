@@ -15,10 +15,12 @@ export default function Result({ inputValues }) {
     const body = [];
     let investmentCapital = inputValues.initialInvestment;
     let totalInterest = 0;
+    
     for (let i = 0; i < results.length; i++) {
         const curResult = results[i];
         investmentCapital += curResult.annualInvestment;
         totalInterest+=curResult.interest;
+
       body.push(
         <tr key={curResult.year}>
           <td>{curResult.year}</td>
@@ -31,7 +33,7 @@ export default function Result({ inputValues }) {
     }
     return body;
   }
-  
+
   return (
     <table id="result" className="center">
       <thead>

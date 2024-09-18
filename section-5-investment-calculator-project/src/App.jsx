@@ -4,7 +4,6 @@ import Result from "./components/Result";
 import { useState } from "react";
 
 function App() {
-
   const [inputValues, setInputValues] = useState({
     initialInvestment: 15000,
     annualInvestment: 1200,
@@ -12,20 +11,32 @@ function App() {
     duration: 10,
   });
 
-  function handleOnChange(fieldName, value) {
-    setInputValues((prevValues) => {
-      let newValues = { ...prevValues };
-      newValues[fieldName] = parseInt(value);
+  const inputIsValid = inputValues.duration >= 1;
 
-      return newValues;
+  function handleOnChange(fieldName, value) {
+    // setInputValues((prevValues) => {
+    //   let newValues = { ...prevValues };
+    //   newValues[fieldName] = parseInt(value);
+
+    //   return newValues;
+    // });
+    setInputValues((prevValues) => {
+      return {
+        ...prevValues,
+        [fieldName]: +value,
+      };
     });
   }
 
   return (
     <>
       <Header />
-      <UserInputCard inputValues={inputValues} handleOnChange={handleOnChange}/>
-      <Result inputValues={inputValues}/>
+      <UserInputCard
+        inputValues={inputValues}
+        handleOnChange={handleOnChange}
+      />
+      {!inputIsValid && <p className="center">Please enter a duration greater than zero.</p>}
+      {inputIsValid && <Result inputValues={inputValues} />}
     </>
   );
 }

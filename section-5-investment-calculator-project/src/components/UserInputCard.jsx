@@ -3,7 +3,8 @@ import UserInputField from "./UserInputField";
 export default function UserInputCard({inputValues, handleOnChange}) {
 
   return (
-    <div id="user-input">
+    // <div id="user-input">
+    <section id="user-input">
       <div className="input-group">
         <UserInputField
           label={"initial investment"}
@@ -28,6 +29,7 @@ export default function UserInputCard({inputValues, handleOnChange}) {
           inputValues={inputValues}
         />
       </div>
-    </div>
+      </section>
+    // </div>
   );
 }
