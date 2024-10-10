@@ -44,3 +44,26 @@ can be used to gain direct DOM element access (great for reading values or acces
     }
     useRef:
     timer.current
+141.
+    useImperativeHandle:
+    
+    import { forwardRef, useRef, useImperativeHandle } from 'react';
+
+    const MyInput = forwardRef(function MyInput(props, ref) {
+    const inputRef = useRef(null);
+
+    useImperativeHandle(ref, () => {
+        return {
+        focus() {
+            inputRef.current.focus();
+        },
+        scrollIntoView() {
+            inputRef.current.scrollIntoView();
+        },
+        };
+    }, []);
+
+    return <input {...props} ref={inputRef} />;
+    });
+146.
+    createPortal
