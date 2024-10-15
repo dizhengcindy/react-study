@@ -20,5 +20,27 @@ local storage data must be a string
     }
 
 useEffect to prevent infinite loop or used for after component rendered at lease once
+
 181.
 useEffect: used for async calls
+
+183.
+access ref.current must wait until component has been rendered once, otherwise ref is undefined
+    so can NOT do:
+        dialog = useRef();
+        if(open){
+            dialog.current.showModal();
+        }
+187.
+useEffect cleanup function
+return () => {};
+
+runs right before component dismount (removed from the DOM) or before useEffect function runs AGAIN
+
+188.
+function is an object in js, even with the same content, two function are still not the same. If add function in the dependencies could cause infinite loop if function keep been recreated. A function gets recreated when the component re-render, like when state updates.
+
+189.
+To fix the problem in 188, we can wrap the function in useCallback.
+const updateFunc = useCallback(function updateFunc(){}, []);
+the dependencies in useCallback should only be props or state
